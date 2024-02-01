@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">GoodGrip</string>
+    <string name="lorem_ipsum">This is <font color="red">red</font> and this <b><i>bold and italic (nested); </i>this just bold</b>,<u>underlined</u></string>
+</resources>
