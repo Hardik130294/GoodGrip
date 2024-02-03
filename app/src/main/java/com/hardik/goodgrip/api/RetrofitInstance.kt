@@ -1,6 +1,6 @@
 package com.hardik.goodgrip.api
 
-import com.google.gson.Gson
+
 import com.hardik.goodgrip.util.Constants.Companion.BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

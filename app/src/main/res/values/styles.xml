@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="RoundedImageViewStyle">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">20%</item>
+        <item name="cornerSizeTopLeft">20%</item>
+        <item name="cornerSizeBottomRight">20%</item>
+        <item name="cornerSizeBottomLeft">20%</item>
+        <item name="cardElevation">10dp</item>
+        <item name="paddingEnd">@dimen/_1sdp</item>
+        <item name="paddingStart">@dimen/_1sdp</item>
+        <item name="android:paddingTop">@dimen/_1sdp</item>
+        <item name="android:paddingBottom">@dimen/_1sdp</item>
+        <item name="background">@drawable/card_background_border</item>
+    </style>
+
+</resources>

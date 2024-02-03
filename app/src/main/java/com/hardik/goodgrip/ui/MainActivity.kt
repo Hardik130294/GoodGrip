@@ -5,10 +5,18 @@ import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
 import android.widget.TextView
+import androidx.appcompat.widget.Toolbar
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.text.HtmlCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.CenterInside
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.hardik.goodgrip.R
 import com.hardik.goodgrip.db.RoomDatabaseInstance
 import com.hardik.goodgrip.repository.RepositoryInstance
@@ -17,6 +25,12 @@ import kotlin.math.log
 class MainActivity : AppCompatActivity() {
     val TAG = MainActivity::class.java.simpleName
     lateinit var viewModel: MainViewModel
+    lateinit var navView: BottomNavigationView
+    lateinit var my_toolbar: Toolbar
+    lateinit var appBarLayout: AppBarLayout
+    lateinit var container: ConstraintLayout
+    var isToolbarVisible = true
+    var isBottomNavigationViewVisible = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,8 +39,36 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this, viewModelProviderFactory).get(MainViewModel::class.java)
 
         setContentView(R.layout.activity_main)
+        appBarLayout = findViewById(R.id.appBarLayout)
+        my_toolbar = findViewById(R.id.my_toolbar)
+        container = findViewById(R.id.container)
+        setSupportActionBar(my_toolbar)
 
-        viewModel.posts.observe(this) {
+        navView = findViewById(R.id.nav_view)
+//        navView.setupWithNavController(findNavController(R.id.nav_host_fragment_activity_news))
+        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.userFragment,R.id.userDetailsFragment
+            )
+        )
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
+
+        // Handle the scroll change to show/hide the Toolbar and BottomNavigationView
+        appBarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { _, verticalOffset ->
+            val maxScroll = appBarLayout.totalScrollRange
+            val percentage = Math.abs(verticalOffset).toFloat() / maxScroll.toFloat()
+
+            if (percentage >= 0.7f && isToolbarVisible) {
+                // Toolbar is fully collapsed, hide it
+                hideToolbarAndBottomNavigationView()
+            } else if (percentage < 0.7f && !isToolbarVisible) {
+                // Toolbar is not fully collapsed, show it
+                showToolbarAndBottomNavigationView()
+            }
+        })
+      /*  viewModel.posts.observe(this) {
             it.data?.iterator()?.forEach { post ->
                 viewModel.savePost(post)
             }
@@ -176,7 +218,21 @@ class MainActivity : AppCompatActivity() {
                     )
                 }
             }
-        }
+        }*/
+    }
+
+    private fun hideToolbarAndBottomNavigationView() {
+        my_toolbar.animate().translationY(-my_toolbar.height.toFloat()).setDuration(200).start()
+        navView.animate().translationY(navView.height.toFloat()).setDuration(200).start()
+        isToolbarVisible = false
+        isBottomNavigationViewVisible = false
+    }
+
+    private fun showToolbarAndBottomNavigationView() {
+        my_toolbar.animate().translationY(0f).setDuration(200).start()
+        navView.animate().translationY(0f).setDuration(200).start()
+        isToolbarVisible = true
+        isBottomNavigationViewVisible = true
     }
 }
 

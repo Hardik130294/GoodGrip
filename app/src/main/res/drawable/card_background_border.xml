@@ -1,0 +1,22 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Outer Ring -->
+    <item>
+        <shape >
+            <solid android:color="@android:color/transparent" />
+            <stroke
+                android:width=".9dp"
+                android:color="@color/shimmerColor" />
+            <corners
+                android:topLeftRadius="@dimen/_10sdp"
+                android:topRightRadius="@dimen/_10sdp"
+                android:bottomLeftRadius="@dimen/_10sdp"
+                android:bottomRightRadius="@dimen/_10sdp"/>
+            <!--    <corners android:radius="35dp" />-->
+            <padding
+                android:bottom="@dimen/_2sdp"
+                android:left="@dimen/_2sdp"
+                android:right="@dimen/_2sdp"
+                android:top="@dimen/_2sdp" />
+        </shape>
+    </item>
+</layer-list>

@@ -1,4 +1,45 @@
 <resources>
     <string name="app_name">GoodGrip</string>
     <string name="lorem_ipsum">This is <font color="red">red</font> and this <b><i>bold and italic (nested); </i>this just bold</b>,<u>underlined</u></string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="amit_kumar">Amit Kumar</string>
+    <string name="username">amitthecoder</string>
+    <string name="bio">As an Android app developer, I have a passion for creating beautiful and functional apps for users. I write code primarily in Kotlin, which is a popular programming language for Android development. My focus is on creating a visually appealing and intuitive user experience that makes using the app a pleasure.</string>
+    <string name="profile">Profile</string>
+    <string name="about">About</string>
+    <string name="user_information">User Information</string>
+    <string name="username_">Username</string>
+    <string name="amitthecoder">amitthecoder</string>
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="age">Age</string>
+    <string name="_21">21</string>
+    <string name="date_of_birth">Date of Birth</string>
+    <string name="_07_02_2003">07/02/2003</string>
+    <string name="mobile">Mobile</string>
+    <string name="_91_9000000009">+91 9000000009</string>
+    <string name="email">Email</string>
+    <string name="axxxxxxa_gmail_com">axxxxxxa@gmail.com</string>
+    <string name="social_media">Social Media</string>
+    <string name="hildegard_org">hildegard.org</string>
+    <string name="website">Website</string>
+    <string name="address">Address</string>
+    <string name="street">Street</string>
+    <string name="suite">Suite</string>
+    <string name="city">City</string>
+    <string name="zipcode">Zipcode</string>
+    <string name="location">Location</string>
+    <string name="Kulas_Light">Kulas Light</string>
+    <string name="Apt_556">Apt. 556</string>
+    <string name="gwenborough">Gwenborough</string>
+    <string name="zipcode_92998_3874">92998-3874</string>
+    <string name="lng_lat">81.1496-37.3159</string>
+    <string name="company">Company</string>
+    <string name="companyName">Romaguera-Crona</string>
+    <string name="name">Name</string>
+    <string name="catchPhrase">CatchPhrase</string>
+    <string name="catchPhraseValue">Multi-layered client-server neural-net</string>
+    <string name="bs">BS</string>
+    <string name="bs_value">harness real-time e-markets</string>
 </resources>

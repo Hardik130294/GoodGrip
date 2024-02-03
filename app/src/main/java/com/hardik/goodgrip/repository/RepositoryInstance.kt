@@ -6,7 +6,6 @@ import com.hardik.goodgrip.models.AlbumResponseItem
 import com.hardik.goodgrip.models.CommentResponseItem
 import com.hardik.goodgrip.models.PhotoResponseItem
 import com.hardik.goodgrip.models.PostResponseItem
-import com.hardik.goodgrip.models.PostWithComments
 import com.hardik.goodgrip.models.TodoResponseItem
 import com.hardik.goodgrip.models.UserResponseItem
 

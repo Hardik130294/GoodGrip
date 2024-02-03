@@ -4,6 +4,7 @@ import com.hardik.goodgrip.models.AlbumResponse
 import com.hardik.goodgrip.models.CommentResponse
 import com.hardik.goodgrip.models.PhotoResponse
 import com.hardik.goodgrip.models.PostResponse
+import com.hardik.goodgrip.models.RandomImageUrlResponse
 import com.hardik.goodgrip.models.TodoResponse
 import com.hardik.goodgrip.models.UserResponse
 import retrofit2.Response

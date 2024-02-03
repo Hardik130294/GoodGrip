@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 import androidx.room.Relation
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 @Keep
 @Entity(tableName = "user")
@@ -46,7 +47,7 @@ data class UserResponseItem(
     @Expose
     val address: Address = Address()
 
-)
+) : Serializable
 
 @Keep
 data class Address(
@@ -66,7 +67,7 @@ data class Address(
     @SerializedName("zipcode")
     @Expose
     val zipcode: String = "" // 92998-3874
-)
+) : Serializable
 
 @Keep
 data class Geo(
@@ -76,7 +77,7 @@ data class Geo(
     @SerializedName("lng")
     @Expose
     val lng: String = "" // 81.1496
-)
+) : Serializable
 
 
 @Keep
@@ -90,7 +91,7 @@ data class Company(
     @SerializedName("name")
     @Expose
     val name: String = "" // Romaguera-Crona
-)
+) : Serializable
 
 data class UserWithDetails(
     @Embedded
@@ -109,4 +110,4 @@ data class UserWithDetails(
 
     @Relation(parentColumn = "id", entityColumn = "user_id")
     val todos: List<TodoResponseItem> // Assuming a one-to-many relationship with todos
-)
+) : Serializable

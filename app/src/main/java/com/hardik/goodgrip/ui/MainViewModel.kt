@@ -19,7 +19,6 @@ import com.hardik.goodgrip.models.PhotoResponse
 import com.hardik.goodgrip.models.PhotoResponseItem
 import com.hardik.goodgrip.models.PostResponse
 import com.hardik.goodgrip.models.PostResponseItem
-import com.hardik.goodgrip.models.PostWithComments
 import com.hardik.goodgrip.models.TodoResponse
 import com.hardik.goodgrip.models.TodoResponseItem
 import com.hardik.goodgrip.models.UserResponse
@@ -53,12 +52,12 @@ class MainViewModel(app: Application, private val repositoryInstance: Repository
 
 
     init {
-        getPosts()
-        getComments()
-        getAlbums()
-        getPhotos()
-        getTodos()
-        getUsers()
+//        getPosts()
+//        getComments()
+//        getAlbums()
+//        getPhotos()
+//        getTodos()
+//        getUsers()
     }
 
     // Post API methods
