@@ -22,10 +22,13 @@ interface RoomDatabaseDao {
 
     // Post
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun upsertPost(post: PostResponseItem) : Long
+    suspend fun upsertPost(post: PostResponseItem): Long
 
     @Query("SELECT * FROM post")
-    fun getAllPosts() : LiveData<List<PostResponseItem>>
+    fun getAllPosts(): LiveData<List<PostResponseItem>>
+
+    @Query("SELECT * FROM post WHERE user_id = :userId")
+    fun getAllPosts(userId: Int): LiveData<List<PostResponseItem>>
 
     @Delete
     suspend fun deletePost(post: PostResponseItem)
@@ -38,10 +41,13 @@ interface RoomDatabaseDao {
 
     // Comment
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun upsertComment(comment: CommentResponseItem) : Long
+    suspend fun upsertComment(comment: CommentResponseItem): Long
 
     @Query("SELECT * FROM comment")
-    fun getAllComments() : LiveData<List<CommentResponseItem>>
+    fun getAllComments(): LiveData<List<CommentResponseItem>>
+
+    @Query("SELECT * FROM comment where post_id = :postId")
+    fun getAllComments(postId: Int): LiveData<List<CommentResponseItem>>
 
     @Delete
     suspend fun deleteComment(comment: CommentResponseItem)
@@ -49,10 +55,14 @@ interface RoomDatabaseDao {
 
     // Album
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun upsertAlbum(album: AlbumResponseItem) : Long
+    suspend fun upsertAlbum(album: AlbumResponseItem): Long
 
     @Query("SELECT * FROM album")
-    fun getAllAlbums() : LiveData<List<AlbumResponseItem>>
+    fun getAllAlbums(): LiveData<List<AlbumResponseItem>>
+
+    @Query("SELECT * FROM album WHERE user_id = :userId")
+    fun getAllAlbums(userId: Int): LiveData<List<AlbumResponseItem>>
+
 
     @Delete
     suspend fun deleteAlbum(album: AlbumResponseItem)
@@ -65,10 +75,13 @@ interface RoomDatabaseDao {
 
     // Photo
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun upsertPhoto(photo: PhotoResponseItem) : Long
+    suspend fun upsertPhoto(photo: PhotoResponseItem): Long
 
     @Query("SELECT * FROM photo")
-    fun getAllPhotos() : LiveData<List<PhotoResponseItem>>
+    fun getAllPhotos(): LiveData<List<PhotoResponseItem>>
+
+    @Query("SELECT * FROM photo where album_id = :albumId")
+    fun getAllPhotos(albumId: Int): LiveData<List<PhotoResponseItem>>
 
     @Delete
     suspend fun deletePhoto(photo: PhotoResponseItem)
@@ -76,20 +89,23 @@ interface RoomDatabaseDao {
 
     // Todos
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun upsertTodo(todo: TodoResponseItem) : Long
+    suspend fun upsertTodo(todo: TodoResponseItem): Long
 
     @Query("SELECT * FROM todo")
-    fun getAllTodos() : LiveData<List<TodoResponseItem>>
+    fun getAllTodos(): LiveData<List<TodoResponseItem>>
+
+    @Query("SELECT * FROM todo where user_id = :userId")
+    fun getAllTodos(userId: Int): LiveData<List<TodoResponseItem>>
 
     @Delete
     suspend fun deleteTodo(todo: TodoResponseItem)
 
     // User
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun upsertUser(user: UserResponseItem) : Long
+    suspend fun upsertUser(user: UserResponseItem): Long
 
     @Query("SELECT * FROM user")
-    fun getAllUsers() : LiveData<List<UserResponseItem>>
+    fun getAllUsers(): LiveData<List<UserResponseItem>>
 
     @Delete
     suspend fun deleteUser(user: UserResponseItem)

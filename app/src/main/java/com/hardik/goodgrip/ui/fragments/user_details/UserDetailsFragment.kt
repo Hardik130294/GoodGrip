@@ -3,26 +3,23 @@ package com.hardik.goodgrip.ui.fragments.user_details
 import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebView
 import android.widget.ScrollView
 import androidx.annotation.RequiresApi
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.hardik.goodgrip.R
 import com.hardik.goodgrip.databinding.FragmentUserDetailsBinding
 import com.hardik.goodgrip.models.UserResponseItem
 import com.hardik.goodgrip.util.Constants.Companion.PARAM_USER
+import com.hardik.goodgrip.util.Constants.Companion.PARAM_USER_ID
 
 private const val ARG_PARAM_USER = PARAM_USER
 
@@ -32,13 +29,13 @@ class UserDetailsFragment : Fragment() {
     private var _binding: FragmentUserDetailsBinding? = null
     private val binding get() = _binding!!
 
-    private var param1: UserResponseItem? = null
+    private var paramUserItem: UserResponseItem? = null
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getSerializable(ARG_PARAM_USER, UserResponseItem::class.java)
+            paramUserItem = it.getSerializable(ARG_PARAM_USER, UserResponseItem::class.java)
         }
     }
 
@@ -78,7 +75,7 @@ class UserDetailsFragment : Fragment() {
             .error(R.drawable.ic_launcher_background)
             .diskCacheStrategy(DiskCacheStrategy.NONE)
             .into(binding.sivProfile)
-        param1?.let {
+        paramUserItem?.let {
 
             binding.tvName.text = it.name
             binding.tvUsername.text = it.username
@@ -94,6 +91,22 @@ class UserDetailsFragment : Fragment() {
             binding.tvCatchPhrase.text = it.company.catchPhrase
             binding.tvBs.text = it.company.bs
 
+        }
+
+        binding.tvAlbums.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_userDetailsFragment_to_albumFragment,
+                Bundle().apply { putInt(PARAM_USER_ID,paramUserItem!!.id) })
+        }
+        binding.tvPosts.setOnClickListener{
+            findNavController().navigate(
+                R.id.action_userDetailsFragment_to_postFragment,
+                Bundle().apply { putInt(PARAM_USER_ID,paramUserItem!!.id) })
+        }
+        binding.tvTodos.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_userDetailsFragment_to_todoFragment,
+                Bundle().apply { putInt(PARAM_USER_ID,paramUserItem!!.id) })
         }
 
     }

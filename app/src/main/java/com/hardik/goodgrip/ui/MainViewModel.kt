@@ -102,7 +102,8 @@ class MainViewModel(app: Application, private val repositoryInstance: Repository
     fun savePost(postResponseItem: PostResponseItem) = viewModelScope.launch {
         repositoryInstance.upsertPost(postResponseItem)
     }
-    fun getSavedPost() = repositoryInstance.getAllPosts()
+    fun getSavedPosts() = repositoryInstance.getAllPosts()
+    fun getSavedPosts(userId: Int) = repositoryInstance.getAllPosts(userId = userId)
     fun deletePost(postResponseItem: PostResponseItem) = viewModelScope.launch {
         repositoryInstance.deletePosts(postResponseItem)
     }
@@ -153,6 +154,7 @@ class MainViewModel(app: Application, private val repositoryInstance: Repository
         repositoryInstance.upsertComment(commentResponseItem)
     }
     fun getSavedComments() = repositoryInstance.getAllComments()
+    fun getSavedComments(postId: Int) = repositoryInstance.getAllComments(postId = postId)
     fun deleteComments(commentResponseItem: CommentResponseItem) = viewModelScope.launch {
         Log.d(TAG, "deleteComments: viewModelScope")
         repositoryInstance.deleteComments(commentResponseItem)
@@ -206,6 +208,7 @@ class MainViewModel(app: Application, private val repositoryInstance: Repository
         repositoryInstance.upsertAlbum(response)
     }
     fun getSavedAlbums() = repositoryInstance.getAllAlbums()
+    fun getSavedAlbums(userId: Int) = repositoryInstance.getAllAlbums(userId = userId)
     fun deleteAlbum(response: AlbumResponseItem) = viewModelScope.launch {
         Log.d(TAG, "deleteAlbum: viewModelScope")
         repositoryInstance.deleteAlbum(response)
@@ -256,6 +259,7 @@ class MainViewModel(app: Application, private val repositoryInstance: Repository
         repositoryInstance.upsertPhoto(response)
     }
     fun getSavedPhotos() = repositoryInstance.getAllPhotos()
+    fun getSavedPhotos(albumId: Int) = repositoryInstance.getAllPhotos(albumId = albumId)
     fun deletePhoto(response: PhotoResponseItem) = viewModelScope.launch {
         Log.d(TAG, "deletePhoto: viewModelScope")
         repositoryInstance.deletePhoto(response)
@@ -306,6 +310,7 @@ class MainViewModel(app: Application, private val repositoryInstance: Repository
         repositoryInstance.upsertTodo(response)
     }
     fun getSavedTodos() = repositoryInstance.getAllTodos()
+    fun getSavedTodos(userId: Int) = repositoryInstance.getAllTodos(userId = userId)
     fun deleteTodo(response: TodoResponseItem) = viewModelScope.launch {
         Log.d(TAG, "deleteTodo: viewModelScope")
         repositoryInstance.deleteTodo(response)

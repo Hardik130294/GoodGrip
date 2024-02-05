@@ -3,6 +3,18 @@
 
     <item
         android:id="@+id/userFragment"
-        android:icon="@android:drawable/gallery_thumb"
-        android:title="User" />
+        android:icon="@drawable/icon_users_list"
+        android:title="@string/users" />
+    <item
+        android:icon="@drawable/icon_album"
+        android:id="@+id/albumFragment"
+        android:title="@string/albums" />
+    <item
+        android:icon="@drawable/icon_paste"
+        android:id="@+id/postFragment"
+        android:title="@string/posts" />
+    <item
+        android:icon="@drawable/icon_todo_list"
+        android:id="@+id/todoFragment"
+        android:title="@string/todos" />
 </menu>

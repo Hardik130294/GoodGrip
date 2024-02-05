@@ -42,4 +42,11 @@
     <string name="catchPhraseValue">Multi-layered client-server neural-net</string>
     <string name="bs">BS</string>
     <string name="bs_value">harness real-time e-markets</string>
+    <string name="activity">Activity</string>
+    <string name="albums">Albums</string>
+    <string name="posts">Posts</string>
+    <string name="todos">Todos</string>
+    <string name="completed">Completed</string>
+    <string name="uncompleted">Uncompleted</string>
+    <string name="users">Users</string>
 </resources>

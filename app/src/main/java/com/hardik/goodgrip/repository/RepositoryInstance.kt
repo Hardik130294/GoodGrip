@@ -18,6 +18,7 @@ class RepositoryInstance (val db : RoomDatabaseInstance){
     suspend fun upsertPost(post: PostResponseItem) = db.getRoomDatabaseDao().upsertPost(post)
 
     fun getAllPosts() = db.getRoomDatabaseDao().getAllPosts()
+    fun getAllPosts(userId: Int) = db.getRoomDatabaseDao().getAllPosts(userId = userId)
 
     suspend fun deletePosts(post: PostResponseItem) = db.getRoomDatabaseDao().deletePost(post)
 
@@ -30,6 +31,7 @@ class RepositoryInstance (val db : RoomDatabaseInstance){
     suspend fun upsertComment(comment: CommentResponseItem) = db.getRoomDatabaseDao().upsertComment(comment)
 
     fun getAllComments() = db.getRoomDatabaseDao().getAllComments()
+    fun getAllComments(postId: Int) = db.getRoomDatabaseDao().getAllComments(postId = postId)
 
     suspend fun deleteComments(comment: CommentResponseItem) = db.getRoomDatabaseDao().deleteComment(comment)
 
@@ -37,6 +39,7 @@ class RepositoryInstance (val db : RoomDatabaseInstance){
     suspend fun getAlbums() = RetrofitInstance.api.getAlbums()
     suspend fun upsertAlbum(album: AlbumResponseItem) = db.getRoomDatabaseDao().upsertAlbum(album)
     fun getAllAlbums() = db.getRoomDatabaseDao().getAllAlbums()
+    fun getAllAlbums(userId: Int) = db.getRoomDatabaseDao().getAllAlbums(userId = userId)
     suspend fun deleteAlbum(album: AlbumResponseItem) = db.getRoomDatabaseDao().deleteAlbum(album)
 
     // Album with Photos
@@ -46,12 +49,14 @@ class RepositoryInstance (val db : RoomDatabaseInstance){
     suspend fun getPhotos() = RetrofitInstance.api.getPhotos()
     suspend fun upsertPhoto(photo: PhotoResponseItem) = db.getRoomDatabaseDao().upsertPhoto(photo)
     fun getAllPhotos() = db.getRoomDatabaseDao().getAllPhotos()
+    fun getAllPhotos(albumId: Int) = db.getRoomDatabaseDao().getAllPhotos(albumId = albumId)
     suspend fun deletePhoto(photo: PhotoResponseItem) = db.getRoomDatabaseDao().deletePhoto(photo)
 
     // Todo
     suspend fun getTodos() = RetrofitInstance.api.getTodos()
     suspend fun upsertTodo(todo: TodoResponseItem) = db.getRoomDatabaseDao().upsertTodo(todo)
     fun getAllTodos() = db.getRoomDatabaseDao().getAllTodos()
+    fun getAllTodos(userId: Int) = db.getRoomDatabaseDao().getAllTodos(userId = userId)
     suspend fun deleteTodo(todo: TodoResponseItem) = db.getRoomDatabaseDao().deleteTodo(todo)
 
     // User

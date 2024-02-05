@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
+import android.view.Menu
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -11,6 +12,7 @@ import androidx.core.text.HtmlCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
@@ -25,6 +27,7 @@ import kotlin.math.log
 class MainActivity : AppCompatActivity() {
     val TAG = MainActivity::class.java.simpleName
     lateinit var viewModel: MainViewModel
+    private lateinit var appBarConfiguration: AppBarConfiguration
     lateinit var navView: BottomNavigationView
     lateinit var my_toolbar: Toolbar
     lateinit var appBarLayout: AppBarLayout
@@ -47,9 +50,9 @@ class MainActivity : AppCompatActivity() {
         navView = findViewById(R.id.nav_view)
 //        navView.setupWithNavController(findNavController(R.id.nav_host_fragment_activity_news))
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        val appBarConfiguration = AppBarConfiguration(
+        appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.userFragment,R.id.userDetailsFragment
+                R.id.userFragment,R.id.userDetailsFragment,R.id.albumFragment,R.id.photoFragment,R.id.todoFragment,R.id.photoFragment,R.id.commentFragment
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -221,6 +224,17 @@ class MainActivity : AppCompatActivity() {
         }*/
     }
 
+//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        menuInflater.inflate(R.menu.main, menu)
+//        return true
+//    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
     private fun hideToolbarAndBottomNavigationView() {
         my_toolbar.animate().translationY(-my_toolbar.height.toFloat()).setDuration(200).start()
         navView.animate().translationY(navView.height.toFloat()).setDuration(200).start()
@@ -234,6 +248,8 @@ class MainActivity : AppCompatActivity() {
         isToolbarVisible = true
         isBottomNavigationViewVisible = true
     }
+
+
 }
 
 //https://jsonplaceholder.typicode.com/posts     -> one to many (user to posts)

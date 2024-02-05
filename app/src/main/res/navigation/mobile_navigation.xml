@@ -24,5 +24,48 @@
             app:argType="com.hardik.goodgrip.models.UserResponseItem"
             app:nullable="true"
             android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_userDetailsFragment_to_albumFragment"
+            app:destination="@id/albumFragment" />
+        <action
+            android:id="@+id/action_userDetailsFragment_to_postFragment"
+            app:destination="@id/postFragment" />
+        <action
+            android:id="@+id/action_userDetailsFragment_to_todoFragment"
+            app:destination="@id/todoFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/albumFragment"
+        android:name="com.hardik.goodgrip.ui.fragments.album.AlbumFragment"
+        android:label="Album"
+        tools:layout="@layout/fragment_album" >
+        <action
+            android:id="@+id/action_albumFragment_to_photoFragment"
+            app:destination="@id/photoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/postFragment"
+        android:name="com.hardik.goodgrip.ui.fragments.post.PostFragment"
+        android:label="Post"
+        tools:layout="@layout/fragment_post" >
+        <action
+            android:id="@+id/action_postFragment_to_commentFragment"
+            app:destination="@id/commentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/todoFragment"
+        android:name="com.hardik.goodgrip.ui.fragments.todo.TodoFragment"
+        android:label="Todo"
+        tools:layout="@layout/fragment_todo" />
+    <fragment
+        android:id="@+id/photoFragment"
+        android:name="com.hardik.goodgrip.ui.fragments.photo.PhotoFragment"
+        android:label="Photo"
+        tools:layout="@layout/fragment_photo" />
+    <fragment
+        android:id="@+id/commentFragment"
+        android:name="com.hardik.goodgrip.ui.fragments.comment.CommentFragment"
+        android:label="Comment"
+        tools:layout="@layout/fragment_comment" />
+
 </navigation>
