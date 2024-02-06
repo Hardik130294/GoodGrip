@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AbsListView
+import android.widget.Toast
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,6 +19,7 @@ import com.hardik.goodgrip.models.UserResponseItem
 import com.hardik.goodgrip.ui.MainActivity
 import com.hardik.goodgrip.ui.MainViewModel
 import com.hardik.goodgrip.util.Constants.Companion.PARAM_USER
+import com.hardik.goodgrip.util.Resource
 
 private const val ARG_PARAM_USER = PARAM_USER
 
@@ -80,10 +82,31 @@ class UserFragment : Fragment() {
                     }
                 }*/
 
+        viewModel.getUsers()
+        viewModel.users.observe(viewLifecycleOwner){
+//            it.data?.iterator()?.forEach { user -> viewModel.saveUser(user) }
+            when(it){
+                is Resource.Success -> {
+                    hideProgressBar()
+                    it.data?.let { viewModel.saveUser(it) }
+                }
+                is Resource.Error -> {
+                    hideProgressBar()
+                    it.message?.let { message ->
+                        Log.e(TAG, "An error occurred $message")
+                        Toast.makeText(activity, "An error occurred $message", Toast.LENGTH_LONG).show()
+                    }
+                }
+                is Resource.Loading -> {
+                    showProgressBar()
+                }
+            }
+        }
         viewModel.getSavedUsers().observe(viewLifecycleOwner) { response ->
             userAdapter.differ.submitList(response.toList())
             binding.recyclerview.setPadding(0, 0, 0, 0)
-            hideProgressBar()
+//            hideProgressBar()
+            (activity as MainActivity).supportActionBar?.title = "User ${response.size}"
         }
 
     }

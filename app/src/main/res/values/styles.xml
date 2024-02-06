@@ -15,4 +15,13 @@
         <item name="background">@drawable/card_background_border</item>
     </style>
 
+    <style name="ShapeAppearanceOverlay.MyApp.Button.Rounded" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">80dp</item>
+    </style>
+    <style name="GoodGrip.Button" parent="Widget.MaterialComponents.Button">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MyApp.Button.Rounded</item>
+    </style>
+
+
 </resources>

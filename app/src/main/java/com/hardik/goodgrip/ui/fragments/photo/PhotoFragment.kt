@@ -1,11 +1,13 @@
 package com.hardik.goodgrip.ui.fragments.photo
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AbsListView
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +19,7 @@ import com.hardik.goodgrip.models.PhotoResponseItem
 import com.hardik.goodgrip.ui.MainActivity
 import com.hardik.goodgrip.ui.MainViewModel
 import com.hardik.goodgrip.util.Constants.Companion.PARAM_ALBUM_ID
+import com.hardik.goodgrip.util.Resource
 
 
 private const val ARG_PARAM_ALBUM_ID = PARAM_ALBUM_ID
@@ -53,10 +56,31 @@ class PhotoFragment : Fragment() {
         showProgressBar()
         setUpRecyclerView()
 
+        viewModel.getPhotos()
+        viewModel.photos.observe(viewLifecycleOwner){
+//            it.data?.iterator()?.forEach { photo -> viewModel.savePhoto(photo) }
+            when(it){
+                is Resource.Success -> {
+                    hideProgressBar()
+                    it.data?.let { viewModel.savePhoto(it) }
+                }
+                is Resource.Error -> {
+                    hideProgressBar()
+                    it.message?.let { message ->
+                        Log.e(TAG, "An error occurred $message")
+                        Toast.makeText(activity, "An error occurred $message", Toast.LENGTH_LONG).show()
+                    }
+                }
+                is Resource.Loading -> {
+                    showProgressBar()
+                }
+            }
+        }
         val observer: Observer<List<PhotoResponseItem>> = Observer { response ->
             photoAdapter.differ.submitList(response.toList())
             binding.recyclerview.setPadding(0, 0, 0, 0)
-            hideProgressBar()
+//            hideProgressBar()
+            (activity as MainActivity).supportActionBar?.title = "Photo ${response.size}"
         }
 
         if (paramAlbumId != null) {

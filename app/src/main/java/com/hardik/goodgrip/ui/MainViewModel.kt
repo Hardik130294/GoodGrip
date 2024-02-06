@@ -99,9 +99,8 @@ class MainViewModel(app: Application, private val repositoryInstance: Repository
         return Resource.Error(response.message())
     }
     // Post DB request
-    fun savePost(postResponseItem: PostResponseItem) = viewModelScope.launch {
-        repositoryInstance.upsertPost(postResponseItem)
-    }
+    fun savePost(response: PostResponseItem) = viewModelScope.launch { repositoryInstance.upsertPost(response) }
+    fun savePost(response: List<PostResponseItem>) = viewModelScope.launch { repositoryInstance.upsertPost(response) }
     fun getSavedPosts() = repositoryInstance.getAllPosts()
     fun getSavedPosts(userId: Int) = repositoryInstance.getAllPosts(userId = userId)
     fun deletePost(postResponseItem: PostResponseItem) = viewModelScope.launch {
@@ -110,7 +109,7 @@ class MainViewModel(app: Application, private val repositoryInstance: Repository
 
 
     // Comment API methods
-    private fun getComments() = viewModelScope.launch {
+    fun getComments() = viewModelScope.launch {
         Log.d(TAG, "getComments: viewModelScope")
         safeCommentCall()
     }
@@ -150,9 +149,8 @@ class MainViewModel(app: Application, private val repositoryInstance: Repository
         return Resource.Error(response.message())
     }
     // Comment DB request
-    fun saveComment(commentResponseItem: CommentResponseItem) = viewModelScope.launch {
-        repositoryInstance.upsertComment(commentResponseItem)
-    }
+    fun saveComment(response: CommentResponseItem) = viewModelScope.launch { repositoryInstance.upsertComment(response) }
+    fun saveComment(response: List<CommentResponseItem>) = viewModelScope.launch { repositoryInstance.upsertComment(response) }
     fun getSavedComments() = repositoryInstance.getAllComments()
     fun getSavedComments(postId: Int) = repositoryInstance.getAllComments(postId = postId)
     fun deleteComments(commentResponseItem: CommentResponseItem) = viewModelScope.launch {
@@ -204,9 +202,8 @@ class MainViewModel(app: Application, private val repositoryInstance: Repository
         return Resource.Error(response.message())
     }
     // Album DB request
-    fun saveAlbum(response: AlbumResponseItem) = viewModelScope.launch {
-        repositoryInstance.upsertAlbum(response)
-    }
+    fun saveAlbum(response: AlbumResponseItem) = viewModelScope.launch { repositoryInstance.upsertAlbum(response) }
+    fun saveAlbum(response: List<AlbumResponseItem>) = viewModelScope.launch { repositoryInstance.upsertAlbum(response) }
     fun getSavedAlbums() = repositoryInstance.getAllAlbums()
     fun getSavedAlbums(userId: Int) = repositoryInstance.getAllAlbums(userId = userId)
     fun deleteAlbum(response: AlbumResponseItem) = viewModelScope.launch {
@@ -255,9 +252,8 @@ class MainViewModel(app: Application, private val repositoryInstance: Repository
         return Resource.Error(response.message())
     }
     // Photo DB request
-    fun savePhoto(response: PhotoResponseItem) = viewModelScope.launch {
-        repositoryInstance.upsertPhoto(response)
-    }
+    fun savePhoto(response: PhotoResponseItem) = viewModelScope.launch { repositoryInstance.upsertPhoto(response) }
+    fun savePhoto(response: List<PhotoResponseItem>) = viewModelScope.launch { repositoryInstance.upsertPhoto(response) }
     fun getSavedPhotos() = repositoryInstance.getAllPhotos()
     fun getSavedPhotos(albumId: Int) = repositoryInstance.getAllPhotos(albumId = albumId)
     fun deletePhoto(response: PhotoResponseItem) = viewModelScope.launch {
@@ -306,14 +302,17 @@ class MainViewModel(app: Application, private val repositoryInstance: Repository
         return Resource.Error(response.message())
     }
     // Todo DB request
-    fun saveTodo(response: TodoResponseItem) = viewModelScope.launch {
-        repositoryInstance.upsertTodo(response)
-    }
+    fun saveTodo(response: TodoResponseItem) = viewModelScope.launch { repositoryInstance.upsertTodo(response) }
+    fun saveTodo(response: List<TodoResponseItem>) = viewModelScope.launch { repositoryInstance.upsertTodo(response) }
     fun getSavedTodos() = repositoryInstance.getAllTodos()
     fun getSavedTodos(userId: Int) = repositoryInstance.getAllTodos(userId = userId)
     fun deleteTodo(response: TodoResponseItem) = viewModelScope.launch {
         Log.d(TAG, "deleteTodo: viewModelScope")
         repositoryInstance.deleteTodo(response)
+    }
+//    fun isTodoCompleted(todoId: Int) = repositoryInstance.isTodoCompleted(todoId)
+    fun updateTodoCompleted(todoId: Int, isCompleted: Boolean) = viewModelScope.launch {
+        repositoryInstance.updateTodoCompleted(todoId, isCompleted)
     }
 
     // User API request
@@ -357,15 +356,17 @@ class MainViewModel(app: Application, private val repositoryInstance: Repository
         return Resource.Error(response.message())
     }
     // User DB request
-    fun saveUser(response: UserResponseItem) = viewModelScope.launch {
-        repositoryInstance.upsertUser(response)
-    }
+    fun saveUser(response: UserResponseItem) = viewModelScope.launch { repositoryInstance.upsertUser(response) }
+    fun saveUser(response: List<UserResponseItem>) = viewModelScope.launch { repositoryInstance.upsertUser(response) }
     fun getSavedUsers() = repositoryInstance.getAllUsers()
     fun deleteUser(response: UserResponseItem) = viewModelScope.launch {
         Log.d(TAG, "deleteUser: viewModelScope")
         repositoryInstance.deleteUser(response)
     }
 
+    fun getCommentDetails(commentId: Int) = repositoryInstance.getCommentDetails(commentId = commentId)
+
+    fun getTodoDetails(todoId: Int) = repositoryInstance.getTodoDetails(todoId = todoId)
 
     // Check internet connection
     @SuppressLint("ObsoleteSdkInt")

@@ -52,7 +52,8 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.userFragment,R.id.userDetailsFragment,R.id.albumFragment,R.id.photoFragment,R.id.todoFragment,R.id.photoFragment,R.id.commentFragment
+//                R.id.userFragment,R.id.userDetailsFragment,R.id.albumFragment,R.id.photoFragment,R.id.postFragment,R.id.commentFragment,R.id.todoFragment
+                R.id.userFragment,R.id.albumFragment,R.id.postFragment,R.id.todoFragment
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -71,18 +72,19 @@ class MainActivity : AppCompatActivity() {
                 showToolbarAndBottomNavigationView()
             }
         })
-      /*  viewModel.posts.observe(this) {
+        viewModel.posts.observe(this) {
             it.data?.iterator()?.forEach { post ->
                 viewModel.savePost(post)
             }
         }
-        viewModel.getSavedPost().observe(this) {
+        viewModel.getSavedPosts().observe(this) {
             it?.iterator()?.forEach { post ->
 //                Log.w(TAG, "onCreate: $post")
             }
         }
 
-        viewModel.comments.observe(this) {
+       /*
+       viewModel.comments.observe(this) {
             it.data?.iterator()?.forEach { comment ->
                 viewModel.saveComment(comment)
             }

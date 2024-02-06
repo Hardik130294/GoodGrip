@@ -3,12 +3,19 @@ package com.hardik.goodgrip.models
 import androidx.annotation.Keep
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 @Keep
-@Entity(tableName = "todo")
+@Entity(tableName = "todo", foreignKeys = [ForeignKey(
+    entity = UserResponseItem::class,
+    parentColumns = ["id"],
+    childColumns = ["user_id"],
+    onDelete = ForeignKey.CASCADE,
+    onUpdate = ForeignKey.CASCADE
+)])
 data class TodoResponseItem(
     @PrimaryKey(autoGenerate = false)
     @SerializedName("id")
@@ -24,5 +31,4 @@ data class TodoResponseItem(
     @SerializedName("title")
     @Expose
     val title: String = ""
-
 )

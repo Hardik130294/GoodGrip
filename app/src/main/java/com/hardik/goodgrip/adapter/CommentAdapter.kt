@@ -2,6 +2,7 @@ package com.hardik.goodgrip.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -64,6 +65,7 @@ class CommentAdapter: RecyclerView.Adapter<CommentAdapter.CommentViewHolder>() {
                 isSingleLine = true
                 isSelected = true
                 text = comment.email
+                setTextColor(ContextCompat.getColorStateList(context, if (comment.email.endsWith(".com")) android.R.color.holo_green_dark else if (comment.email.endsWith(".biz"))  android.R.color.holo_blue_dark else android.R.color.holo_red_dark) ?: throw IllegalArgumentException("Color resource not found") )
             }
             holder.binding.tvBody.apply {
                 maxLines = 1000

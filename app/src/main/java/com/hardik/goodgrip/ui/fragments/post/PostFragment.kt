@@ -1,11 +1,13 @@
 package com.hardik.goodgrip.ui.fragments.post
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AbsListView
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,6 +22,7 @@ import com.hardik.goodgrip.ui.MainViewModel
 import com.hardik.goodgrip.util.Constants
 import com.hardik.goodgrip.util.Constants.Companion.PARAM_POST_ID
 import com.hardik.goodgrip.util.Constants.Companion.PARAM_USER_ID
+import com.hardik.goodgrip.util.Resource
 
 private const val ARG_PARAM_USER_ID = PARAM_USER_ID
 
@@ -55,10 +58,31 @@ class PostFragment : Fragment() {
         showProgressBar()
         setUpRecyclerView()
 
+        viewModel.getPosts()
+        viewModel.posts.observe(viewLifecycleOwner){
+//            it.data?.iterator()?.forEach { post -> viewModel.savePost(post) }
+            when(it){
+                is Resource.Success -> {
+                    hideProgressBar()
+                    it.data?.let { viewModel.savePost(it) }
+                }
+                is Resource.Error -> {
+                    hideProgressBar()
+                    it.message?.let { message ->
+                        Log.e(TAG, "An error occurred $message")
+                        Toast.makeText(activity, "An error occurred $message", Toast.LENGTH_LONG).show()
+                    }
+                }
+                is Resource.Loading -> {
+                    showProgressBar()
+                }
+            }
+        }
         val observer: Observer<List<PostResponseItem>> = Observer { response ->
             postAdapter.differ.submitList(response.toList())
             binding.recyclerview.setPadding(0, 0, 0, 0)
-            hideProgressBar()
+//            hideProgressBar()
+            (activity as MainActivity).supportActionBar?.title = "Post ${response.size}"
         }
 
         if (paramUserId != null) {
